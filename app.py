@@ -19,7 +19,7 @@ class App:
     def run(self):
         while self.running:
             self.sketchTaskBar()
-            
+            self.sketchGraph()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
@@ -55,6 +55,9 @@ class App:
         self.visualButton.makeButton()
         
         pygame.display.update()
+        
+    def sketchGraph(self):
+        pass
         
         
     

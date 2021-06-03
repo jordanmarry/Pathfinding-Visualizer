@@ -54,8 +54,6 @@ class App:
         self.visualButton = Buttons(self, INDIGO, (WIDTH - 150)//2, (125)//2.75, ALGO_BUTTON_LENGTH*.75, ALGO_BUTTON_HEIGHT*1.5, 'Visualize')
         self.visualButton.makeButton()
         
-        self.sketchGraph()
-        
         pygame.display.update()
         
     def sketchGraph(self):
@@ -66,6 +64,8 @@ class App:
         for y in range(30):
             pygame.draw.line(self.screen, BLACK, (GS_X, GS_Y + y*self.grid_square_length),
                              (GE_X, GS_Y + y*self.grid_square_length))
+            
+        pygame.display.update()
         
         
     

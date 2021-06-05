@@ -141,18 +141,18 @@ class App:
 
     def makeGrid (self):
         grid = []
-        for i in range(50):
+        for i in range(self.grid_col):
             grid.append([])
-            for j in range(25):
+            for j in range(self.grid_row):
                 node = Node(i, j, self.grid_square_length, self.grid_row, self.grid_col)
                 grid[i].append(node)
              
         return grid
 
     def sketchGrid(self):
-        for col in range(50):
+        for col in range(self.grid_col):
             pygame.draw.line(self.screen, BLACK, (GS_X + col*self.grid_square_length, GS_Y), (GS_X + col*self.grid_square_length, GE_Y))
-        for row in range(25):
+        for row in range(self.grid_row):
             pygame.draw.line(self.screen, BLACK, (GS_X, GS_Y + row*self.grid_square_length), (GE_X, GS_Y + row*self.grid_square_length))
 
     def draw(self, grid):
@@ -162,3 +162,14 @@ class App:
             
         self.sketchGrid()
         pygame.display.update()
+
+    #test
+    def getMousePos(self, pos):
+        gap_y = self.grid_square_length // self.grid_row
+        gap_x = self.grid_square_length // self.grid_col
+        y, x = pos
+
+        row = y//gap_y
+        col = x//gap_x
+
+        return row, col

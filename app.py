@@ -84,21 +84,36 @@ class App:
         self.running = True
         self.screen = WIN = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption("Algorithm Visualizer")
-        self.start_node_x = None
-        self.start_node_y = None
-        self.end_node_x = None
-        self.end_node_y = None
     
     def run(self):
         self.screen.fill(WHITE)
         self.sketchTaskBar()
         grid = self.makeGrid()
 
+        started = False
+
+        start = None
+        end = None
+
         while self.running:
             self.draw(grid)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
+
+                if started:
+                    continue
+
+                #Left Click
+                if pygame.mouse.get_pressed()[0]:
+                    pos = pygame.mouse.get_pos()
+                    row, col = self.getMousePos(pos)
+                    node = grid[row][col]
+
+                    if not start and node != end:
+                        start = node
+                        start.makeStart()
+                    
 
         pygame.quit()
     
@@ -165,11 +180,9 @@ class App:
 
     #test
     def getMousePos(self, pos):
-        gap_y = self.grid_square_length // self.grid_row
-        gap_x = self.grid_square_length // self.grid_col
         y, x = pos
 
-        row = y//gap_y
-        col = x//gap_x
+        row = y//self.grid_square_length
+        col = x//self.grid_square_length
 
         return row, col

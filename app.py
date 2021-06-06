@@ -84,7 +84,7 @@ class App:
         self.grid_square_length = 24
         self.grid_row = 25
         self.grid_col = 50
-        self.algo = ''
+        self.algo = ""
         self.running = True
         self.screen = WIN = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption("Algorithm Visualizer")
@@ -127,7 +127,34 @@ class App:
                             node.makeWall()
 
                     except:
-                        continue
+                        if start != None and end != None:
+                            try:
+                                row, col = pos
+                                print(row, col)
+
+                                #
+                                # A Star Search
+                                #
+
+                                if row >= 20 and row <=220 and col >= 640 and col <= 660:
+                                    self.algo = "astar"
+                                    print(self.algo)
+                                    self.visualButton.color = GREEN
+                                    self.visualButton.makeButton()
+
+                                #
+                                # Visual Button
+                                #
+
+                                if row >= 525 and row <= 675 and col >= 665 and col <= 695:
+                                    if self.visualButton.color == GREEN:
+                                        if self.algo == 'astar':
+                                            continue # run astar
+
+                            except:
+                                continue
+                        else:
+                            continue
 
                 elif pygame.mouse.get_pressed()[2]:  # Right Mouse Button
                     pos = pygame.mouse.get_pos()

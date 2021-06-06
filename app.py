@@ -108,11 +108,15 @@ class App:
                 if pygame.mouse.get_pressed()[0]:
                     pos = pygame.mouse.get_pos()
                     row, col = self.getMousePos(pos)
-                    node = grid[row][col]
+                    try:
+                        node = grid[row][col]
+                    except:
+                        continue
 
                     if not start and node != end:
                         start = node
                         start.makeStart()
+                        
                     
 
         pygame.quit()

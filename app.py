@@ -2,6 +2,7 @@ import sys
 import pygame
 from settings import *
 from button import *
+from astaralgo import *
 
 
 class Node:
@@ -65,14 +66,16 @@ class Node:
         if self.row < self.total_rows - 1 and not grid[self.row + 1][self.col].isWall():
             self.neighbors.append(grid[self.row + 1][self.col])
 
-        if self.row > 0 and not grid[self.row - 1][self.col].isWall():  # Goes Up
+        # Goes Up
+        if self.row > 0 and not grid[self.row - 1][self.col].isWall():  
             self.neighbors.append(grid[self.row - 1][self.col])
 
         # Goes Right
-        if self.col < self.total_cols - 1 and not grid[self.row][self.col + 1].isWall():
+        if self.col < self.total_rows - 1 and not grid[self.row][self.col + 1].isWall():
             self.neighbors.append(grid[self.row][self.col + 1])
 
-        if self.col > 0 and not grid[self.row][self.col - 1].isWall():  # Goes Left
+        # Goes Left
+        if self.col > 0 and not grid[self.row][self.col - 1].isWall():  
             self.neighbors.append(grid[self.row][self.col - 1])
 
     def __lt__(self, other):
@@ -127,7 +130,7 @@ class App:
                             node.makeWall()
 
                     except:
-                        if start != None and end != None:
+                        if start != None and end != None and started != True:
                             try:
                                 row, col = pos
                                 print(row, col)
@@ -148,9 +151,14 @@ class App:
 
                                 if row >= 525 and row <= 675 and col >= 665 and col <= 695:
                                     if self.visualButton.color == GREEN:
-                                        if self.algo == 'astar':
-                                            continue # run astar
+                                        if self.algo == "astar":
+                                            for row in grid:
+                                                for node in row:
+                                                    node.updateNeighbor(grid)
 
+                                            print("almost there")
+                                            astar(lambda: self.draw(grid), grid, start, end)                                              
+                                            print("Done")
                             except:
                                 continue
                         else:

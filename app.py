@@ -137,7 +137,7 @@ class App:
                                 print(row, col)
 
                                 #
-                                # A Star Search
+                                # A Star Search Button
                                 #
 
                                 if row >= 20 and row <=220 and col >= 640 and col <= 660:
@@ -152,14 +152,21 @@ class App:
 
                                 if row >= 525 and row <= 675 and col >= 665 and col <= 695:
                                     if self.visualButton.color == GREEN:
+                                        
+                                        #
+                                        # A Star Search
+                                        #
+                                        
                                         if self.algo == "astar":
                                             for row in grid:
                                                 for node in row:
                                                     node.updateNeighbor(grid)
 
-                                            print("almost there")
-                                            astar(lambda: self.draw(grid), grid, start, end)                                              
-                                            print("Done")
+                                            if astar(lambda: self.draw(grid), grid, start, end):
+                                                continue
+                                            else:
+                                                # Make something say that the path was not found.
+                                                continue                                               
                             except:
                                 continue
                         else:

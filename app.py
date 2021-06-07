@@ -97,7 +97,6 @@ class App:
         self.screen.fill(WHITE)
         self.sketchTaskBar()
         grid = self.makeGrid()
-        gridCopy = grid
 
         started = False
 
@@ -132,17 +131,17 @@ class App:
                             end.makeEnd()
                             endWas = True
 
-                        elif not start and node != end and startWas ==  True:
+                        elif not start and node != end :
                             start = node
                             start.makeStart()
-                            if end != None:
+                            if end != None and startWas ==  True:
                                 self.visualButton.color = GREEN
                                 self.visualButton.makeButton()
                         
-                        elif not end and node != start and endWas == True:
+                        elif not end and node != start:
                             end = node
                             end.makeEnd()
-                            if start != None:
+                            if start != None and endWas == True:
                                 self.visualButton.color = GREEN
                                 self.visualButton.makeButton()
                         
@@ -218,6 +217,8 @@ class App:
                                     start = None
                                     end = None
                                     grid = self.makeGrid()
+                                    self.visualButton.color = INDIGO
+                                    self.visualButton.makeButton()
 
                                 #
                                 # Visual Button

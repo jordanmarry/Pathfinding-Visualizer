@@ -16,7 +16,6 @@ def reconstruct(prevNodes, curr, draw):
 
 
 def astar(draw, grid, start, end):
-    print("IN ASTAR")
     count = 0
     open_set = PriorityQueue()
     open_set.put((0, count, start))

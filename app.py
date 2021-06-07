@@ -10,8 +10,8 @@ class Node:
         self.row = row
         self.col = col
         self.width = width
-        self.total_rows = total_rows
-        self.total_cols = total_cols
+        self.total_rows = total_cols
+        self.total_cols = total_rows
         self.x = row * width
         self.y = col * width
         self.color = WHITE
@@ -60,6 +60,7 @@ class Node:
         pygame.draw.rect(
             win, self.color, (self.x, self.y, self.width, self.width))
 
+    #Fix Code for A star Stuff it bad
     def updateNeighbor(self, grid):
         self.neighbors = []
         # Goes Down
@@ -71,7 +72,7 @@ class Node:
             self.neighbors.append(grid[self.row - 1][self.col])
 
         # Goes Right
-        if self.col < self.total_rows - 1 and not grid[self.row][self.col + 1].isWall():
+        if self.col < self.total_cols - 1 and not grid[self.row][self.col + 1].isWall():
             self.neighbors.append(grid[self.row][self.col + 1])
 
         # Goes Left
@@ -243,7 +244,6 @@ class App:
         self.sketchGrid()
         pygame.display.update()
 
-    # test
     def getMousePos(self, pos):
         y, x = pos
 

@@ -16,6 +16,11 @@ def reconstruct(prevNodes, curr, draw):
 
 
 def astar(draw, grid, start, end):
+    for row in grid:
+        for node in row:
+            updateNeighbor(node, grid)
+
+
     count = 0
     open_set = PriorityQueue()
     open_set.put((0, count, start))
@@ -63,7 +68,6 @@ def astar(draw, grid, start, end):
     return False
 
 def updateNeighbor(node, grid):
-    print("WE IN HERE LIKE SWIMWEAR")
     node.neighbors = []
     # Goes Down
     if node.row < node.total_rows - 1 and not grid[node.row + 1][node.col].isWall():

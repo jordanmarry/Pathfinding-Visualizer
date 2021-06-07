@@ -15,6 +15,7 @@ class Node:
         self.x = row * width
         self.y = col * width
         self.color = WHITE
+        self.gridCopy = None
         self.neighbors = []
 
     def getPos(self):
@@ -80,11 +81,10 @@ class App:
         grid = self.makeGrid()
 
         started = False
+        executed = False
 
         start = None
-        startWas = False
         end = None
-        endWas = False
 
         while self.running:
             self.draw(grid)
@@ -95,6 +95,12 @@ class App:
                 if started:
                     continue
 
+                if executed:
+                    self.clearButton.color = GREEN
+                    self.clearButton.makeButton()
+                    self.visualButton.color = INDIGO
+                    self.visualButton.makeButton()
+
                 # Left Click
                 if pygame.mouse.get_pressed()[0]:
                     pos = pygame.mouse.get_pos()
@@ -102,37 +108,35 @@ class App:
                     try:
                         node = grid[row][col]
 
-                        if not start and node != end and startWas == False:
+                        if not start and node != end and executed != True:
                             start = node
                             start.makeStart()
-                            startWas = True
 
-                        elif not end and node != start and endWas == False:
+                        elif not end and node != start and executed != True:
                             end = node
                             end.makeEnd()
-                            endWas = True
-
-                        elif not start and node != end :
-                            start = node
-                            start.makeStart()
-                            if end != None and startWas ==  True:
-                                self.visualButton.color = GREEN
-                                self.visualButton.makeButton()
                         
-                        elif not end and node != start:
-                            end = node
-                            end.makeEnd()
-                            if start != None and endWas == True:
-                                self.visualButton.color = GREEN
-                                self.visualButton.makeButton()
-                        
-                        elif node != start and node != end and start and end:
+                        elif node != start and node != end and start and end and executed != True:
                             node.makeWall()
 
                     except:
-                        if start != None and end != None and started != True:
+                        row, col = pos
+                        #
+                        # Clear Button
+                        #    
+                                    
+                        if row >= 850 and row <= 1000 and col >= 665 and col <= 700:
+                            start = None
+                            end = None
+                            grid = self.makeGrid()
+                            self.sketchTaskBar()
+                            executed = False
+                            startWas = False
+                            endWas = False
+                            self.algo = ""
+
+                        elif start != None and end != None and started != True and executed != True:
                             try:
-                                row, col = pos
                                 print(row, col)
                                 
 
@@ -142,70 +146,85 @@ class App:
 
                                 if row >= 20 and row <= 220 and col >= 640 and col <= 660:
                                     self.algo = "astar"
+                                    self.sketchTaskBar()
+                                    self.astarButton.color = GREEN
+                                    self.astarButton.makeButton()
                                     self.visualButton.color = GREEN
                                     self.visualButton.makeButton()
                                     print(self.algo)
+                                
                                 #
                                 # BFS Button
                                 #
                                 
                                 elif row >= 20 and row <= 220 and col >= 670 and col <= 690:
                                     self.algo = "bfs"
+                                    self.sketchTaskBar()
+                                    self.bfsButton.color = GREEN
+                                    self.bfsButton.makeButton()
                                     self.visualButton.color = GREEN
                                     self.visualButton.makeButton()
                                     print(self.algo)
+                               
                                 #
                                 # DFS Button
                                 #    
                                     
                                 elif row >= 20 and row <= 220 and col >= 700 and col <= 720:
                                     self.algo = "dfs"
+                                    self.sketchTaskBar()
+                                    self.dfsButton.color = GREEN
+                                    self.dfsButton.makeButton()
                                     self.visualButton.color = GREEN
                                     self.visualButton.makeButton()
                                     print(self.algo)
+                                
                                 #
                                 # BiDir Search Button
                                 #    
                                     
                                 elif row >= 240 and row <= 440 and col >= 640 and col <= 660:
                                     self.algo = "bidir"
+                                    self.sketchTaskBar()
+                                    self.bidirButton.color = GREEN
+                                    self.bidirButton.makeButton()
                                     self.visualButton.color = GREEN
                                     self.visualButton.makeButton()
                                     print(self.algo)
+                                
                                 #
                                 # Dijkstra Button
                                 #    
                                     
                                 elif row >= 240 and row <= 440 and col >= 670 and col <= 690:
                                     self.algo = "dijk"
+                                    self.sketchTaskBar()
+                                    self.dijButton.color = GREEN
+                                    self.dijButton.makeButton()
                                     self.visualButton.color = GREEN
                                     self.visualButton.makeButton()
                                     print(self.algo)
+
                                 #
                                 # GBFS Search Button
                                 #    
                                     
                                 elif row >= 240 and row <= 440 and col >= 700 and col <= 720:
                                     self.algo = "gbfs"
+                                    self.sketchTaskBar()
+                                    self.gbfsButton.color = GREEN
+                                    self.gbfsButton.makeButton()
                                     self.visualButton.color = GREEN
                                     self.visualButton.makeButton()
                                     print(self.algo)
-                                #
-                                # Clear Button
-                                #    
-                                    
-                                elif row >= 850 and row <= 1000 and col >= 665 and col <= 700:
-                                    start = None
-                                    end = None
-                                    grid = self.makeGrid()
-                                    self.visualButton.color = INDIGO
-                                    self.visualButton.makeButton()
 
                                 #
                                 # Visual Button
                                 #
 
                                 elif row >= 525 and row <= 675 and col >= 665 and col <= 695:
+                                    started = True
+                                    executed = True
                                     if self.visualButton.color == GREEN:
                                         
                                         #
@@ -213,17 +232,56 @@ class App:
                                         #
                                         
                                         if self.algo == "astar":
-                                            for row in grid:
-                                                for node in row:
-                                                    print("UPDATING")
-                                                    updateNeighbor(node, grid)
-                                            
                                             if astar(lambda: self.draw(grid), grid, start, end):
                                                 # Make something say path found!
+                                                started = False
                                                 continue
                                             else:
                                                 # Make something say that the path was not found.
-                                                continue                                               
+                                                started = False
+                                                continue   
+
+                                        #
+                                        # BFS Search
+                                        #
+
+                                        elif self.algo == "bfs":
+                                            started = False
+                                            continue
+
+                                        #
+                                        # DFS Search
+                                        #
+
+                                        elif self.algo == "dfs":
+                                            started = False
+                                            continue
+
+                                        #
+                                        # Bidir Search
+                                        #
+
+                                        elif self.algo == "bidir":
+                                            started = False
+                                            continue
+
+                                        #
+                                        # dijk Search
+                                        #
+
+                                        elif self.algo == "dijk":
+                                            started = False
+                                            continue
+
+                                        #
+                                        # GBFS Search
+                                        #
+
+                                        elif self.algo == "gbfs":
+                                            started = False
+                                            continue
+
+
                             except:
                                 continue
                         else:
@@ -233,16 +291,17 @@ class App:
                     pos = pygame.mouse.get_pos()
                     row, col = self.getMousePos(pos)
                     try:
-                        node = grid[row][col]
-                        node.resetNode()
-                        if node == start:
-                            start = None
-                            self.visualButton.color = INDIGO
-                            self.visualButton.makeButton()
-                        elif node == end:
-                            end = None
-                            self.visualButton.color = INDIGO
-                            self.visualButton.makeButton()
+                        if executed != True:
+                            node = grid[row][col]
+                            node.resetNode()
+                            if node == start:
+                                start = None
+                                self.visualButton.color = INDIGO
+                                self.visualButton.makeButton()
+                            elif node == end:
+                                end = None
+                                self.visualButton.color = INDIGO
+                                self.visualButton.makeButton()
                     except:
                         continue
 

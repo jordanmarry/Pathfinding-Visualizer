@@ -60,25 +60,6 @@ class Node:
         pygame.draw.rect(
             win, self.color, (self.x, self.y, self.width, self.width))
 
-    #Fix Code for A star Stuff it bad
-    def updateNeighbor(self, grid):
-        self.neighbors = []
-        # Goes Down
-        if self.row < self.total_rows - 1 and not grid[self.row + 1][self.col].isWall():
-            self.neighbors.append(grid[self.row + 1][self.col])
-
-        # Goes Up
-        if self.row > 0 and not grid[self.row - 1][self.col].isWall():  
-            self.neighbors.append(grid[self.row - 1][self.col])
-
-        # Goes Right
-        if self.col < self.total_cols - 1 and not grid[self.row][self.col + 1].isWall():
-            self.neighbors.append(grid[self.row][self.col + 1])
-
-        # Goes Left
-        if self.col > 0 and not grid[self.row][self.col - 1].isWall():  
-            self.neighbors.append(grid[self.row][self.col - 1])
-
     def __lt__(self, other):
         return False
 
@@ -234,7 +215,8 @@ class App:
                                         if self.algo == "astar":
                                             for row in grid:
                                                 for node in row:
-                                                    node.updateNeighbor(grid)
+                                                    print("UPDATING")
+                                                    updateNeighbor(node, grid)
                                             
                                             if astar(lambda: self.draw(grid), grid, start, end):
                                                 # Make something say path found!

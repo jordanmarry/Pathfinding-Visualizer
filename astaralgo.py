@@ -61,3 +61,22 @@ def astar(draw, grid, start, end):
             curr.makeVisited()
 
     return False
+
+def updateNeighbor(node, grid):
+    print("WE IN HERE LIKE SWIMWEAR")
+    node.neighbors = []
+    # Goes Down
+    if node.row < node.total_rows - 1 and not grid[node.row + 1][node.col].isWall():
+        node.neighbors.append(grid[node.row + 1][node.col])
+
+    # Goes Up
+    if node.row > 0 and not grid[node.row - 1][node.col].isWall():  
+        node.neighbors.append(grid[node.row - 1][node.col])
+
+    # Goes Right
+    if node.col < node.total_cols - 1 and not grid[node.row][node.col + 1].isWall():
+        node.neighbors.append(grid[node.row][node.col + 1])
+
+    # Goes Left
+    if node.col > 0 and not grid[node.row][node.col - 1].isWall():  
+        node.neighbors.append(grid[node.row][node.col - 1])

@@ -43,7 +43,7 @@ class Node:
         self.color = BLUE
 
     def makeNeighbor(self):
-        self.color = LIGHT_BLUE
+        self.color = DARK_BLUE
 
     def makeWall(self):
         self.color = BLACK
@@ -131,8 +131,6 @@ class App:
                             grid = self.makeGrid()
                             self.sketchTaskBar()
                             executed = False
-                            startWas = False
-                            endWas = False
                             self.algo = ""
 
                         elif start != None and end != None and started != True and executed != True:

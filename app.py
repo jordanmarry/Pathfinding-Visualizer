@@ -3,6 +3,7 @@ import pygame
 from settings import *
 from button import *
 from astaralgo import *
+from bfs import *
 
 
 class Node:
@@ -231,11 +232,9 @@ class App:
                                         
                                         if self.algo == "astar":
                                             if astar(lambda: self.draw(grid), grid, start, end):
-                                                # Make something say path found!
                                                 started = False
                                                 continue
                                             else:
-                                                # Make something say that the path was not found.
                                                 started = False
                                                 continue   
 
@@ -244,8 +243,12 @@ class App:
                                         #
 
                                         elif self.algo == "bfs":
-                                            started = False
-                                            continue
+                                            if bfs(lambda: self.draw(grid), grid, start, end):
+                                                started = False
+                                                continue
+                                            else:
+                                                started = False
+                                                continue
 
                                         #
                                         # DFS Search

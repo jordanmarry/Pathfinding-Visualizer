@@ -221,9 +221,9 @@ class App:
                                 #
 
                                 elif row >= 525 and row <= 675 and col >= 665 and col <= 695:
-                                    started = True
-                                    executed = True
                                     if self.visualButton.color == GREEN:
+                                        started = True
+                                        executed = True
                                         
                                         #
                                         # A Star Search

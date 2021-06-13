@@ -4,6 +4,7 @@ from settings import *
 from button import *
 from astaralgo import *
 from bfs import *
+from dfs import *
 
 
 class Node:
@@ -265,8 +266,12 @@ class App:
                                         #
 
                                         elif self.algo == "dfs":
-                                            started = False
-                                            continue
+                                            if dfs(lambda: self.draw(grid), grid, start, start, end):
+                                                started = False
+                                                continue
+                                            else:
+                                                started = False
+                                                continue
 
                                         #
                                         # Bidir Search

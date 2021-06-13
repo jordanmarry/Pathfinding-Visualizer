@@ -85,7 +85,9 @@ class App:
         executed = False
 
         start = None
+        startWas = False
         end = None
+        endWas = False
 
         while self.running:
             self.draw(grid)
@@ -109,15 +111,23 @@ class App:
                     try:
                         node = grid[row][col]
 
-                        if not start and node != end and executed != True:
+                        if not start and node != end :
                             start = node
                             start.makeStart()
-
-                        elif not end and node != start and executed != True:
+                            if end != None and startWas ==  True and self.algo != "":
+                                self.visualButton.color = GREEN
+                                self.visualButton.makeButton()
+                            startWas = True
+                        
+                        elif not end and node != start:
                             end = node
                             end.makeEnd()
+                            if start != None and endWas == True and self.algo != "":
+                                self.visualButton.color = GREEN
+                                self.visualButton.makeButton()
+                            endWas = True
                         
-                        elif node != start and node != end and start and end and executed != True:
+                        elif node != start and node != end and start and end:
                             node.makeWall()
 
                     except:

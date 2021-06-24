@@ -5,6 +5,9 @@ from button import *
 from astaralgo import *
 from bfs import *
 from dfs import *
+from dijk import *
+from gbfs import *
+from bidir import *
 
 
 class Node:
@@ -278,24 +281,36 @@ class App:
                                         #
 
                                         elif self.algo == "bidir":
-                                            started = False
-                                            continue
+                                            if bidir(lambda: self.draw(grid), grid, start, start, end):
+                                                started = False
+                                                continue
+                                            else:
+                                                started = False
+                                                continue
 
                                         #
                                         # dijk Search
                                         #
 
                                         elif self.algo == "dijk":
-                                            started = False
-                                            continue
+                                            if dijk(lambda: self.draw(grid), grid, start, start, end):
+                                                started = False
+                                                continue
+                                            else:
+                                                started = False
+                                                continue
 
                                         #
                                         # GBFS Search
                                         #
 
                                         elif self.algo == "gbfs":
-                                            started = False
-                                            continue
+                                            if gbfs(lambda: self.draw(grid), grid, start, start, end):
+                                                started = False
+                                                continue
+                                            else:
+                                                started = False
+                                                continue
 
 
                             except:

@@ -269,7 +269,7 @@ class App:
                                         #
 
                                         elif self.algo == "dfs":
-                                            if dfs(lambda: self.draw(grid), grid, start, start, end):
+                                            if dfs(lambda: self.draw(grid), grid, start, end):
                                                 started = False
                                                 continue
                                             else:

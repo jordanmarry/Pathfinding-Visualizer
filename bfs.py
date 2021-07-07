@@ -7,14 +7,11 @@ def bfs(draw, grid, start, end):
         for node in row:
             updateNeighbor(node, grid)
             
-    visited = []
-    queue = []
+    visited = [start]
+    queue = [start]
     prevNodes = {}
     
     curr = start
-    
-    visited.append(curr)
-    queue.append(curr)
     
     while queue:
         for event in pygame.event.get():

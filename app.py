@@ -21,6 +21,7 @@ class Node:
         self.y = col * width
         self.color = WHITE
         self.gridCopy = None
+        self.weight = 1
         self.neighbors = []
 
     def getPos(self):
@@ -281,7 +282,7 @@ class App:
                                         #
 
                                         elif self.algo == "bidir":
-                                            if bidir(lambda: self.draw(grid), grid, start, start, end):
+                                            if bidir(lambda: self.draw(grid), grid, start, end):
                                                 started = False
                                                 continue
                                             else:
@@ -293,7 +294,7 @@ class App:
                                         #
 
                                         elif self.algo == "dijk":
-                                            if dijk(lambda: self.draw(grid), grid, start, start, end):
+                                            if dijk(lambda: self.draw(grid), grid, start, end):
                                                 started = False
                                                 continue
                                             else:
@@ -305,7 +306,7 @@ class App:
                                         #
 
                                         elif self.algo == "gbfs":
-                                            if gbfs(lambda: self.draw(grid), grid, start, start, end):
+                                            if gbfs(lambda: self.draw(grid), grid, start, end):
                                                 started = False
                                                 continue
                                             else:

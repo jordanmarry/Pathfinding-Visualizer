@@ -25,9 +25,9 @@ def bidir(draw, grid, start, end):
         curr = startQueue.pop(0)
 
         if curr in endVisited:
-            final = {**endPrevNodes, **startPrevNodes}
             reconstruct(startPrevNodes, curr, draw)
             reconstruct(endPrevNodes, curr, draw)
+            curr.makePath()
             start.makeStart()
             end.makeEnd()
             return True

@@ -24,9 +24,10 @@ def bidir(draw, grid, start, end):
 
         curr = startQueue.pop(0)
 
-        if curr in endVisited or curr2 in startVisited:
-            final = startPrevNodes | endPrevNodes
-            reconstruct(final, end, draw)
+        if curr in endVisited:
+            final = {**endPrevNodes, **startPrevNodes}
+            reconstruct(startPrevNodes, curr, draw)
+            reconstruct(endPrevNodes, curr, draw)
             start.makeStart()
             end.makeEnd()
             return True
@@ -52,6 +53,3 @@ def bidir(draw, grid, start, end):
 
         if curr2 != end:
             curr2.makeVisited()
-
-
-

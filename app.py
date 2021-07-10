@@ -132,7 +132,7 @@ class App:
                                 self.visualButton.makeButton()
                             endWas = True
                         
-                        elif node != start and node != end and start and end:
+                        elif node != start and node != end and start and end and self.clearButton.color != GREEN:
                             node.makeWall()
 
                     except:

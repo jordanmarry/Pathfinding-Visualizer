@@ -25,6 +25,12 @@ def reconstruct(prevNodes, curr, draw):
         curr = prevNodes[curr]
         curr.makePath()
         draw()
+
+def reconstructDij(prevNodes, curr, draw):
+    while curr in prevNodes:
+        curr = prevNodes[curr][0]
+        curr.makePath()
+        draw()
         
 # A* Star Algo
 

@@ -24,7 +24,6 @@ def dijk(draw, grid, start, end):
             reconstructDij(prevNodes, end, draw)
             start.makeStart()
             end.makeEnd()
-            
             return True
         
         for neighbor in curr.neighbors:

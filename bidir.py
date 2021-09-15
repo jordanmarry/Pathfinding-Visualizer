@@ -53,3 +53,5 @@ def bidir(draw, grid, start, end):
 
         if curr2 != end:
             curr2.makeVisited()
+    
+    return False

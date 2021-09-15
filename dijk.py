@@ -40,3 +40,5 @@ def dijk(draw, grid, start, end):
         
         if curr != start:
             curr.makeVisited()
+
+    return False

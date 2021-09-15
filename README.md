@@ -1,5 +1,4 @@
 # Pathfinding-Visualizer
-## Introduction
 Visuals for common searching algorithms.
 
 ## Visualized Algorithms

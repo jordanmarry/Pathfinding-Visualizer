@@ -6,7 +6,6 @@ from astaralgo import *
 from bfs import *
 from dfs import *
 from dijk import *
-from gbfs import *
 from bidir import *
 
 
@@ -184,7 +183,7 @@ class App:
                                 # DFS Button
                                 #    
                                     
-                                elif row >= 20 and row <= 220 and col >= 700 and col <= 720:
+                                elif row >= 120 and row <= 320 and col >= 700 and col <= 720:
                                     self.algo = "dfs"
                                     self.sketchTaskBar()
                                     self.dfsButton.color = GREEN
@@ -215,19 +214,6 @@ class App:
                                     self.sketchTaskBar()
                                     self.dijButton.color = GREEN
                                     self.dijButton.makeButton()
-                                    self.visualButton.color = GREEN
-                                    self.visualButton.makeButton()
-                                    print(self.algo)
-
-                                #
-                                # GBFS Search Button
-                                #    
-                                    
-                                elif row >= 240 and row <= 440 and col >= 700 and col <= 720:
-                                    self.algo = "gbfs"
-                                    self.sketchTaskBar()
-                                    self.gbfsButton.color = GREEN
-                                    self.gbfsButton.makeButton()
                                     self.visualButton.color = GREEN
                                     self.visualButton.makeButton()
                                     print(self.algo)
@@ -301,18 +287,6 @@ class App:
                                                 started = False
                                                 continue
 
-                                        #
-                                        # GBFS Search
-                                        #
-
-                                        elif self.algo == "gbfs":
-                                            if gbfs(lambda: self.draw(grid), grid, start, end):
-                                                started = False
-                                                continue
-                                            else:
-                                                started = False
-                                                continue
-
 
                             except:
                                 continue
@@ -350,7 +324,7 @@ class App:
                                  ALGO_BUTTON_LENGTH, ALGO_BUTTON_HEIGHT, 'Breadth First Search')
         self.bfsButton.makeButton()
 
-        self.dfsButton = Buttons(self, BLACK, ALGO_BUTTON_POSX, ALGO_BUTTON_POSY+60,
+        self.dfsButton = Buttons(self, BLACK, ALGO_BUTTON_POSX*6, ALGO_BUTTON_POSY+60,
                                  ALGO_BUTTON_LENGTH, ALGO_BUTTON_HEIGHT, 'Depth First Search')
         self.dfsButton.makeButton()
 
@@ -361,10 +335,6 @@ class App:
         self.dijButton = Buttons(self, BLACK, ALGO_BUTTON_POSX*12, ALGO_BUTTON_POSY+30,
                                  ALGO_BUTTON_LENGTH, ALGO_BUTTON_HEIGHT, 'Dijkstra')
         self.dijButton.makeButton()
-
-        self.gbfsButton = Buttons(self, BLACK, ALGO_BUTTON_POSX*12, ALGO_BUTTON_POSY+60,
-                                  ALGO_BUTTON_LENGTH, ALGO_BUTTON_HEIGHT, 'Greedy Best First')
-        self.gbfsButton.makeButton()
 
         self.clearButton = Buttons(self, BLACK, (WIDTH - 350), 665,
                                    ALGO_BUTTON_LENGTH*.75, ALGO_BUTTON_HEIGHT*1.5, 'Clear')

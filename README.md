@@ -6,6 +6,5 @@ The Pathfinding Visualizer visuals searching algorithms.
 - Breadth First Search
 - Depth First Search
 - Bidirectional Search
-- Greedy Best First
 
 

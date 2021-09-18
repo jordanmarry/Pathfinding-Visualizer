@@ -10,8 +10,8 @@ Visuals for common searching algorithms.
 
 ## Needed Packages
 
-`pip install pygame`
+Open your command prompt and run this line: `pip install pygame`
 
 ## Running
 
-`python main.py`
+Open up your command prompt/terminal, make your way to the folder, and run this line: `python main.py`
